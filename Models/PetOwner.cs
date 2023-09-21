@@ -15,8 +15,14 @@ namespace pet_hotel
         [Required]
         public string emailAddress { get; set; }
 
-        // [NotMapped]
-        // public int count { get; set; }
+        [NotMapped]
+        public int petCount 
+        { 
+            get { return Pets?.Count ?? 0; }
+        }
+
+        [JsonIgnore]
+        public List<Pet> Pets { get; set; }
 
         // [ForeignKey("Pet")] 
         // public List<int> petCountId {get; set;}

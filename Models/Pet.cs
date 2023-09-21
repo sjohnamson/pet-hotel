@@ -17,6 +17,8 @@ namespace pet_hotel
         Retriever
     }
 
+
+
     public enum PetColorType
     {
         White,
@@ -25,6 +27,8 @@ namespace pet_hotel
         Tricolor,
         Spotted
     }
+
+
     public class Pet
     {
 
@@ -34,19 +38,24 @@ namespace pet_hotel
         public string name { get; set; }
 
         [Required]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public PetBreedType breed { get; set; }
 
         [Required]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public PetColorType color { get; set; }
 
-        public DateTime checkedInAt { get; set; }
+        public DateTime? checkedInAt { get; set; } = null;
 
         [Required]
+        [ForeignKey("petOwner")]
         public int petOwnerid { get; set; }
 
-        [ForeignKey("petOwnerid")]
         public PetOwner petOwner { get; set; }
 
-
+        //  public Pet()
+        //  {
+        //     pet.CheckedInAt = DateTime.Now; // Set the default value to the current date and time
+        //  }
     }
 }
